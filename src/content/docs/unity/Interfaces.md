@@ -11,12 +11,20 @@ public MonoBehaviour InteractScript;
 ```
 
 Then:
-
-`interactable.InteractScript.Invoke("Interact", 0);`
+```
+interactable.InteractScript.Invoke("Interact", 0);
+```
 
 This requires multiple direct references to the MonoBehavior. While this is a *fine* approach for what it was originally for, there is a much better implementation using Interfaces.
 
-For instance, while working with game commands embedded within a string (i.e. `string s = "this is a message <SetFlag: global, true>`) it quickly became a pain to deal with multiple edge cases.
+For instance, while working with game commands embedded within a string 
+
+i.e. 
+```
+string s = "this is a message <SetFlag: global, true>
+```
+
+it quickly became a pain to deal with multiple edge cases.
 
 The solution to this was an Interface like so:
 
