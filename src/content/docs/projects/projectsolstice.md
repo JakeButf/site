@@ -14,7 +14,7 @@ Some screenshots of this time still exist!
 
 |      |      |  |
 | ------------- | ------------- | ------------- |
-| ![](./src/assets/og-sunstead.png) | ![](./src/assets/og-sunstead2.png) | ![](./src/assets/og-sunstead3.png) |
+| ![](./src/assets/og-sunstead.webp) | ![](./src/assets/og-sunstead2.webp) | ![](./src/assets/og-sunstead3.webp) |
 
 However, as I improved as a developer and continued to learn more about game development, I drifted away from RPG Maker MV and into other engines/frameworks. Recreating these core mechanics became a sort of "first goal" when learning something new. Due to this, basic versions of this game have existed in: [MonoGame](https://monogame.net/), [Godot](https://godotengine.org/), and [Unity](https://unity.com/).
 
