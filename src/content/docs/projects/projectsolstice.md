@@ -3,7 +3,7 @@ title: Project Solstice
 description: A work in progress title by StudioHH
 ---
 
-![A logo of project solstice](./src/assets/sunsteadlogo.webp "Title")
+![A logo of project solstice](../../../assets/sunsteadlogo.webp "Title")
 *Working Title*
 
 Project Solstice is currently my main project. As of now, there is not much that will be shared publicly. 
@@ -14,7 +14,7 @@ Some screenshots of this time still exist!
 
 |      |      |  |
 | ------------- | ------------- | ------------- |
-| ![](./src/assets/og-sunstead.webp) | ![](./src/assets/og-sunstead2.webp) | ![](./src/assets/og-sunstead3.webp) |
+| ![](../../../assets/og-sunstead.webp) | ![](../../../assets/og-sunstead2.webp) | ![](../../../assets/og-sunstead3.webp) |
 
 However, as I improved as a developer and continued to learn more about game development, I drifted away from RPG Maker MV and into other engines/frameworks. Recreating these core mechanics became a sort of "first goal" when learning something new. Due to this, basic versions of this game have existed in: [MonoGame](https://monogame.net/), [Godot](https://godotengine.org/), and [Unity](https://unity.com/).
 
