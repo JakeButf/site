@@ -5,16 +5,21 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: '>jakebutf.dev',
+            description: 'Notes regarding programming, game development, and software technology.',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/jakebutf',
+                linkedin: 'https://www.linkedin.com/in/jacob-butfiloski-061ba2276/'
 			},
+            customCss: [
+                './src/styles/custom.css',
+              ],
 			sidebar: [
 				{
-					label: 'Guides',
+					label: 'Unity',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
+						{ label: 'Overview', slug: 'unity/overview' },
 					],
 				},
 				{
