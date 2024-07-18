@@ -20,11 +20,8 @@ export default defineConfig({
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Overview', slug: 'unity/overview' },
+						{ label: 'Interfaces', slug: 'unity/interfaces' },
 					],
-				},
-				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
 				},
 			],
 		}),
