@@ -16,6 +16,13 @@ export default defineConfig({
               ],
 			sidebar: [
 				{
+					label: 'Projects',
+					items: [
+						{ label: 'Project Solstice', slug: 'projects/projectsolstice' },
+						{ label: 'dz', slug: 'projects/dz'}
+					]
+				},
+				{
 					label: 'Unity',
 					items: [
 						// Each item here is one entry in the navigation menu.
