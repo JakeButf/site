@@ -31,6 +31,12 @@ export default defineConfig({
 						{ label: 'Interfaces', slug: 'unity/interfaces' },
 					],
 				},
+				{
+					label: 'Graphics',
+					items: [
+						{ label: 'Sum of Sines Water', slug: 'graphics/sumofsines'},
+					]
+				}
 			],
 		}),
 	],

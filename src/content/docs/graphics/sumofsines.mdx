@@ -1,0 +1,321 @@
+---
+title: Water Simulation Using Sum of Sines
+description: Wave Effect using Sum of Sines
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+<Card title="Repository" icon="github">
+    <a href="https://github.com/JakeButf/Sum-of-Sines-Water-Shader">Click to view the repository on GitHub.</a>
+</Card>
+
+<Card title="Reference" icon="open-book">
+    The techniques used in this are based on the ones found in <a href="https://www.nvidia.com/en-us/drivers/gpu-gems-home/">GPU Gems</a> by NVIDIA.
+</Card>
+</CardGrid>
+
+Water simulation is a common challenge in not only just game development, but any form of graphic development.
+Accurate fluid simulation is computationally heavy and often over-kill for the effect that most people desire.
+
+While there are a number of unique solutions to this challenge, the one I'll be demonstrating here is known as the "Sum of Sines".
+
+## What is the Sum of Sines?
+
+The Sum of Sines in this case is exactly what it sounds like, the addition of multiple different sine waves in a vertex shader to mimick the effect of waves in a body of water.
+The equation of this can be demonstrated in this scary looking formula:
+
+<img src="https://latex.codecogs.com/svg.image?\fg{white}&space;H(x,y,t)=\sum(A_i*sin(D_i)\bullet(x,y)*w_i&plus;t*\varphi))" title=" H(x,y,t)=\sum(A_i*sin(D_i)\bullet(x,y)*w_i+t*\varphi))" />
+Where:
+```
+A = Amplitude
+D = Direction (the horizontal vector of the wave front)
+L = Wavelength
+w = Frequency (2pi / L)
+```
+
+## Creating the Shader
+
+To demonstrate this concept, let's look at the process of creating this shader for Unity.
+
+### 1 Sine Wave
+To begin, lets start with just a single sine wave in the x direction:
+
+```
+Shader "Custom/SumofSines"
+{
+    Properties
+    {
+        _Amplitude ("Amplitude", Range(0,1)) = 0.5
+        _Speed ("Speed", Range(0, 100)) = 2
+        _Wavelength ("Wavelength", Range(0, 100)) = 1
+    }
+    SubShader
+    {
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            //Vertex Input
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+            };
+
+            //Vertex Output
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex: SV_POSITION;
+            };
+
+            //Shader Properties
+            float _Amplitude;
+            float _Speed;
+            float _Wavelength;
+
+            //Vertex Calculations
+            v2f vert(appdata v)
+            {
+                v2f o;
+                //Sum of Sines Displacement (1 sin wave)
+                float frequency = (2 * 3.14) / _Wavelength;
+                float displacement = _Amplitude * sin((_Time * (_Speed * frequency)) + (frequency * v.vertex.x));
+
+                //Apply displacement to vertex position
+                o.vertex = UnityObjectToClipPos(v.vertex + float4(0, displacement, 0, 0)); //only displace y
+                o.uv = v.uv;
+
+                return o;
+            }
+
+            fixed4 frag (v2f i) : SV_Target
+            {
+                return fixed4(i.uv, 0, 1);
+            }
+            ENDCG
+        }
+    }
+}
+```
+
+Applying this shader to material and attaching to a basic plane gives us a result that looks something like this:
+<iframe src="https://giphy.com/embed/w0hUVqLwFR0CPvMldX" width="480" height="164" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+So far so good! The sine wave gives us a super simple wave over the mesh of our plane. 
+
+### Fragment Shader
+
+However, we currently are just passing in the UV for the fragment portion of the shader,
+lets change it a bit to make it look more like water.
+
+```
+Shader "Custom/CartoonySumofSines"
+{
+    Properties
+    {
+        _Amplitude ("Amplitude", Range(0,10)) = 0.5
+        _Speed ("Speed", Range(0, 100)) = 2
+        _Wavelength ("Wavelength", Range(0, 100)) = 1
+        _Direction ("Direction", Vector) = (0, 0, 0, 0)
+        _Color1 ("Color 1", Color) = (1, 0, 0, 1)
+        _Color2 ("Color 2", Color) = (0, 1, 0, 1)
+        _EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
+        _Threshold ("Threshold", Range(0, 1)) = 0.4
+    }
+    SubShader
+    {
+        Tags { "RenderType"="Opaque" }
+        LOD 200
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+                float3 normal : TEXCOORD1;
+                float sumofsines : TEXCOORD2;
+            };
+
+            float _Amplitude;
+            float _Speed;
+            float _Wavelength;
+            float2 _Direction;
+            float4 _Color1;
+            float4 _Color2;
+            float4 _EdgeColor;
+            float _Threshold;
+
+            v2f vert(appdata v)
+            {
+                v2f o;
+                //Sum of Sines Displacement (1 sin wave)
+                float frequency = (2 * 3.14) / _Wavelength;
+                float displacement = _Amplitude * sin((_Time * (_Speed * frequency)) + (frequency * v.vertex.x));
+
+                //Apply displacement to vertex position
+                o.vertex = UnityObjectToClipPos(v.vertex + float4(0, displacement, 0, 0)); //only displace y
+                o.uv = v.uv;
+                o.normal = mul((float3x3)unity_WorldToObject, v.normal);
+                o.sumofsines = displacement;
+
+                return o;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                float intensity = dot(i.normal, normalize(float3(0, 1, 0)));
+                intensity = floor(intensity / _Threshold) * _Threshold;
+
+                float3 color = lerp(_Color1.rgb, _Color2.rgb, (sin(i.sumofsines) + 1.0) / 2.0);
+                color *= intensity;
+
+                float edge = smoothstep(0.0, 1.0, length(i.normal.xy));
+                edge = 1.0 - edge;
+
+                float4 finalColor = lerp(fixed4(color, 1.0), _EdgeColor, edge);
+                return finalColor;
+            }
+            ENDCG
+        }
+    }
+}
+```
+<iframe src="https://giphy.com/embed/QjILOTbpwH09OhI8MS" width="480" height="164" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+Now it's looking a bit more like water.
+
+### Summing Sines & Direction
+
+Now though, our water is just going in the "x" direction and looks a bit too simple. To fix this, we can implement the dot product of the direction vector with our vertex x & z.
+Additionally, we can create 3 different variable sine waves and add them all together.
+
+```
+Shader "Custom/CartoonySumofSines"
+{
+    Properties
+    {
+        _Amplitude ("Amplitude", Range(0,10)) = 0.5
+        _Speed ("Speed", Range(0, 100)) = 2
+        _Wavelength ("Wavelength", Range(0, 100)) = 1
+        _Direction ("Direction", Vector) = (0, 0, 0, 0)
+        _Color1 ("Color 1", Color) = (1, 0, 0, 1)
+        _Color2 ("Color 2", Color) = (0, 1, 0, 1)
+        _EdgeColor ("Edge Color", Color) = (0, 0, 0, 1)
+        _Threshold ("Threshold", Range(0, 1)) = 0.4
+    }
+    SubShader
+    {
+        Tags { "RenderType"="Opaque" }
+        LOD 200
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+                float3 normal : TEXCOORD1;
+                float sumofsines : TEXCOORD2;
+            };
+
+            float _Amplitude;
+            float _Speed;
+            float _Wavelength;
+            float2 _Direction;
+            float4 _Color1;
+            float4 _Color2;
+            float4 _EdgeColor;
+            float _Threshold;
+
+            v2f vert(appdata v)
+            {
+                v2f o;
+                float frequency = (2 * 3.14) / _Wavelength;
+                float timeFactor = _Time.y * (_Speed * frequency);
+                float2 direction = dot(_Direction, float2(v.vertex.x, v.vertex.z));
+
+                float displacement1 = _Amplitude * sin(timeFactor + frequency * .25 * direction);
+                float displacement2 = _Amplitude * sin(timeFactor + frequency * .5 * direction);
+                float displacement3 = _Amplitude * sin(timeFactor + frequency * 1 * direction);
+
+                float sumofsines = displacement1 + displacement2 + displacement3;
+
+                o.vertex = UnityObjectToClipPos(v.vertex + float4(0, sumofsines, 0, 0));
+                o.uv = v.uv;
+                o.normal = mul((float3x3)unity_WorldToObject, v.normal);
+                o.sumofsines = sumofsines;
+
+                return o;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                float intensity = dot(i.normal, normalize(float3(0, 1, 0)));
+                intensity = floor(intensity / _Threshold) * _Threshold;
+
+                float3 color = lerp(_Color1.rgb, _Color2.rgb, (sin(i.sumofsines) + 1.0) / 2.0);
+                color *= intensity;
+
+                float edge = smoothstep(0.0, 1.0, length(i.normal.xy));
+                edge = 1.0 - edge;
+
+                float4 finalColor = lerp(fixed4(color, 1.0), _EdgeColor, edge);
+                return finalColor;
+            }
+            ENDCG
+        }
+    }
+}
+```
+
+This is our final product:
+
+<iframe src="https://giphy.com/embed/JYH7BlIgHfCp5gSaiN" width="480" height="164" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+For a simple water shader, this looks pretty good for how cheap of a shader it is. However, there's of course more than can be done.
+
+## Additional Implementations
+
+### "Bottle-Necking the Wave"
+
+The waves at the moment look a lot like an upside-down "U" at the moment, which while fine for the look I was going for, isn't quite realistic.
+To change this, we can implement another variable "k" and modify the equation like so:
+
+<img src="https://latex.codecogs.com/svg.image?\bg{black}&space;W_i(x,y,t)=2A_i*(sin(D_i\bullet(x,y)*w_i&plus;t*\varphi)&plus;1)/2)^k" title=" W_i(x,y,t)=2A_i*(sin(D_i\bullet(x,y)*w_i+t*\varphi)+1)/2)^k" />
+
+This will pull in the neck of the wave, creating a more natural looking wave.
+
+## Conclusion
+
+For simple fluid simulation for large bodies of water, such as an ocean, this shader is light-weight and effective enough for more basic implementations.
+However, this method is not great for more realistic water simulations.
