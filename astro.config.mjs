@@ -36,6 +36,12 @@ export default defineConfig({
 					items: [
 						{ label: 'Sum of Sines Water', slug: 'graphics/sumofsines'},
 					]
+				},
+				{
+					label: 'R',
+					items: [
+						{ label: 'Evaluating a Function', slug: 'rprogramming/evaluating'}
+					]
 				}
 			],
 		}),
