@@ -29,6 +29,7 @@ export default defineConfig({
 						{ label: 'Overview', slug: 'unity/overview' },
 						{ label: 'GitHub and Unity', slug: 'unity/usinggit'},
 						{ label: 'Interfaces', slug: 'unity/interfaces' },
+						{ label: 'Time-Based Pathing', slug: 'unity/timebasedpathing'}
 					],
 				},
 				{

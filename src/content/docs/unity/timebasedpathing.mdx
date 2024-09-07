@@ -1,0 +1,84 @@
+---
+title: Time-Based Pathing
+description: An explanation on how I achieved time-based pathing in Unity.
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+<Card title="Repository" icon="github">
+    <a href="https://github.com/JakeButf/NPCScheduler">Click to view the repository on GitHub.</a>
+</Card>
+</CardGrid>
+
+## Overview 
+
+An interesting challenge that I've come across is one that seems simple, but is actually much more complex under the surface is time-based pathing. Imagine this: you have an NPC that has a specific schedule and needs to be at certain places at certain times, how would you handle that? What if time can be reversed? Or sped up? How would you make sure that the NPC is at the right part of their path at the right time at the right speed? 
+<br/>
+
+<div style="text-align: center; width: 50%; height: 50%;">
+    <img src="https://media1.tenor.com/m/g88X2gBT5KsAAAAC/kafei-majora%27s-mask-majora%27s-mask.gif" alt="Centered GIF"></img>
+</div>
+
+"The Legend of Zelda: Majora's Mask" is a good example of this in practice. Time can be reversed, sped up, and slowed down, with NPC's depending on this time.
+
+Even without time-manipulation, this concept is important in the context of Unity games. Like other engines, GameObjects within a scene are instanced when the scene loads. So if there is some form of global time NPC's depend on, this concept will still be important to make sure they are on the right part of their path when loading into a scene.
+
+So how do we solve it?
+
+## The Solution
+
+The solution to the problem, is this scary looking formula:
+
+```
+Let:
+P = path points (p_1, p_2, ..., p_n)
+    T = start and end times (t_start, t_end)
+    t = the specified time
+    L = total line length
+    n = total number of points in P
+    d = L/n
+    t' = (t - t_start) / (t_end - t_start)
+    l = L * t'
+
+
+For all i ∈ {0, 1, ..., n-2}:
+
+    If d * (i + 1) <= l < d * (i + 2), then
+        q = p_{i+1} + (p_{i+2} - p_{i+1}) * ((l - d * (i + 1)) / (d * (i + 2) - d * (i + 1)))
+```
+
+This is a piecewise function that defines the point q for all possible segments in the path. This function covers all possible values of l (and therefore t). It works by determining which segment the NPC is on at time t and then linearly interpolating between the endpoints of that segment to find the exact position of the NPC.
+
+While this is obviously pretty scary looking, it's easier to understand in code.
+
+```
+Vector3 CalculateNPCPosition(NPCPath path, StartEndTimes times, float time)
+    {
+        float normalizedTime = (time - times.startEndTimes[0]) / (times.startEndTimes[1] - times.startEndTimes[0]); //Returns time value between 0-1
+        float lineLength = path.LineLength; //Total length of the line
+        float dividedLength = lineLength / path.GetPathPoints().Count; //Line length between points 
+        float timeDividedLength = lineLength * normalizedTime; //Player point on line
+
+        //Get Closest Point
+        int closestPoint = 0;
+        for(int i = 0; i < path.GetPathPoints().Count; i++)
+        {
+            if(timeDividedLength >= dividedLength * (i + 1))
+            {
+                closestPoint = i;
+            }
+        }
+        closestNPCPoint = closestPoint;
+        //Get value between 0-1 representing how far along the line the player should be (0 being point a, 1 being point b)
+        float pointOnLine = (timeDividedLength - (dividedLength * (closestPoint + 1))) / ((dividedLength * (closestPoint + 2)) - (dividedLength * (closestPoint + 1)));
+        //Return Linear Interpolation of Point A and Point B against time t (pointOnLine)
+        return Vector3.Lerp(path.GetPathPoints()[closestPoint].position, path.GetPathPoints()[closestPoint + 1].position, pointOnLine);
+    }
+```
+
+This function will return a point on a line (defined by Vector3 points in the NPCPath object) based on the current time. If this function runs every single frame, it will properly move the NPC along the path. 
+
+<div style="text-align: center; width: 50%; height: 50%;">
+    <img src="https://camo.githubusercontent.com/02aafb9e561447b2d2f64687750634a449536ed21c08db94377d8221c745b83e/68747470733a2f2f6d65646961312e67697068792e636f6d2f6d656469612f76312e59326c6b505463354d4749334e6a45784d58517763574a3162586f79646d6834624768304d32647064486c706358426d627a6c305a44463064473169634464785a44683059535a6c634431324d563970626e526c636d35686246396e61575a66596e6c666157516d593351395a772f4461715667334a667a7677515878446332742f67697068792e676966" alt="Centered GIF"></img>
+</div>
