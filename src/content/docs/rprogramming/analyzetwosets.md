@@ -149,8 +149,6 @@ The results for each data-set is as follow:
 
 ## Conclusion
 
-**Conclusion:**
-
 Despite the difference in the two data-sets central tendencies, both data-sets have identical measures of variation. This means that while the values in Set #2 are higher than those in Set #1, the spread in both sets is identical.
 
 
