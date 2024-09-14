@@ -41,7 +41,8 @@ export default defineConfig({
 				{
 					label: 'R',
 					items: [
-						{ label: 'Evaluating a Function', slug: 'rprogramming/evaluating'}
+						{ label: 'Evaluating a Function', slug: 'rprogramming/evaluating'},
+						{ label: 'Analyzing Two Data-Sets', slug: 'rprogramming/analyzetwosets'}
 					]
 				}
 			],
