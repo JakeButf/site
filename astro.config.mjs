@@ -42,7 +42,8 @@ export default defineConfig({
 					label: 'R',
 					items: [
 						{ label: 'Evaluating a Function', slug: 'rprogramming/evaluating'},
-						{ label: 'Analyzing Two Data-Sets', slug: 'rprogramming/analyzetwosets'}
+						{ label: 'Analyzing Two Data-Sets', slug: 'rprogramming/analyzetwosets'},
+						{ label: 'Probability and Binomial Distribution', slug: 'rprogramming/probabilityandbinomialdistribution'}
 					]
 				}
 			],
