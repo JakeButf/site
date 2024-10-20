@@ -45,7 +45,8 @@ export default defineConfig({
 						{ label: 'Analyzing Two Data-Sets', slug: 'rprogramming/analyzetwosets'},
 						{ label: 'Probability and Binomial Distribution', slug: 'rprogramming/probabilityandbinomialdistribution'},
 						{ label: 'Correlation Analysis', slug: 'rprogramming/correlationanalysis'},
-						{ label: 'Variance and Standard Deviation', slug: 'rprogramming/mod6'}
+						{ label: 'Variance and Standard Deviation', slug: 'rprogramming/mod6'},
+						{ label: 'Regression', slug: 'rprogramming/mod7'}
 					]
 				}
 			],
