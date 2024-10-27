@@ -46,7 +46,8 @@ export default defineConfig({
 						{ label: 'Probability and Binomial Distribution', slug: 'rprogramming/probabilityandbinomialdistribution'},
 						{ label: 'Correlation Analysis', slug: 'rprogramming/correlationanalysis'},
 						{ label: 'Variance and Standard Deviation', slug: 'rprogramming/mod6'},
-						{ label: 'Regression', slug: 'rprogramming/mod7'}
+						{ label: 'Regression', slug: 'rprogramming/mod7'},
+						{ label: 'Zelazo', slug: 'rprogramming/mod8'}
 					]
 				}
 			],
