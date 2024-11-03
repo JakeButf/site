@@ -47,7 +47,8 @@ export default defineConfig({
 						{ label: 'Correlation Analysis', slug: 'rprogramming/correlationanalysis'},
 						{ label: 'Variance and Standard Deviation', slug: 'rprogramming/mod6'},
 						{ label: 'Regression', slug: 'rprogramming/mod7'},
-						{ label: 'Zelazo', slug: 'rprogramming/mod8'}
+						{ label: 'Zelazo', slug: 'rprogramming/mod8'},
+						{ label: 'Contingency Table', slug: 'rprogramming/mod9'}
 					]
 				}
 			],
