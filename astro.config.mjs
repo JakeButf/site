@@ -48,7 +48,8 @@ export default defineConfig({
 						{ label: 'Variance and Standard Deviation', slug: 'rprogramming/mod6'},
 						{ label: 'Regression', slug: 'rprogramming/mod7'},
 						{ label: 'Zelazo', slug: 'rprogramming/mod8'},
-						{ label: 'Contingency Table', slug: 'rprogramming/mod9'}
+						{ label: 'Contingency Table', slug: 'rprogramming/mod9'},
+						{ label: 'Variance and Regression', slug: 'rprogramming/mod10'}
 					]
 				}
 			],
