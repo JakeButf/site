@@ -50,7 +50,8 @@ export default defineConfig({
 						{ label: 'Zelazo', slug: 'rprogramming/mod8'},
 						{ label: 'Contingency Table', slug: 'rprogramming/mod9'},
 						{ label: 'Variance and Regression', slug: 'rprogramming/mod10'},
-						{ label: 'Models', slug: 'rprogramming/mod11'}
+						{ label: 'Models', slug: 'rprogramming/mod11'},
+						{ label: 'Time Series and Exponential Smoothing', slug: 'rprogramming/mod12'}
 					]
 				}
 			],
