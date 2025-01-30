@@ -21,7 +21,7 @@ export default defineConfig({
 						{ label: 'Project Solstice', slug: 'projects/projectsolstice' },
 						{ label: 'dz', slug: 'projects/dz'},
 						{ label: 'C Renderer', slug: 'projects/crenderer'},
-						{ label: 'Time-Based Pathing', slug: 'unity/timebasedpathing'}
+						{ label: 'Time-Based Pathing', slug: 'projects/timebasedpathing'}
 					]
 				},
 				{
