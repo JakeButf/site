@@ -19,7 +19,8 @@ export default defineConfig({
 					label: 'Projects',
 					items: [
 						{ label: 'Project Solstice', slug: 'projects/projectsolstice' },
-						{ label: 'dz', slug: 'projects/dz'}
+						{ label: 'dz', slug: 'projects/dz'},
+						{ label: 'C Renderer', slug: 'projects/crenderer'}
 					]
 				},
 				{
@@ -36,22 +37,6 @@ export default defineConfig({
 					label: 'Graphics',
 					items: [
 						{ label: 'Sum of Sines Water', slug: 'graphics/sumofsines'},
-					]
-				},
-				{
-					label: 'R',
-					items: [
-						{ label: 'Evaluating a Function', slug: 'rprogramming/evaluating'},
-						{ label: 'Analyzing Two Data-Sets', slug: 'rprogramming/analyzetwosets'},
-						{ label: 'Probability and Binomial Distribution', slug: 'rprogramming/probabilityandbinomialdistribution'},
-						{ label: 'Correlation Analysis', slug: 'rprogramming/correlationanalysis'},
-						{ label: 'Variance and Standard Deviation', slug: 'rprogramming/mod6'},
-						{ label: 'Regression', slug: 'rprogramming/mod7'},
-						{ label: 'Zelazo', slug: 'rprogramming/mod8'},
-						{ label: 'Contingency Table', slug: 'rprogramming/mod9'},
-						{ label: 'Variance and Regression', slug: 'rprogramming/mod10'},
-						{ label: 'Models', slug: 'rprogramming/mod11'},
-						{ label: 'Time Series and Exponential Smoothing', slug: 'rprogramming/mod12'}
 					]
 				}
 			],
