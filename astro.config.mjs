@@ -20,7 +20,8 @@ export default defineConfig({
 					items: [
 						{ label: 'Project Solstice', slug: 'projects/projectsolstice' },
 						{ label: 'dz', slug: 'projects/dz'},
-						{ label: 'C Renderer', slug: 'projects/crenderer'}
+						{ label: 'C Renderer', slug: 'projects/crenderer'},
+						{ label: 'Time-Based Pathing', slug: 'unity/timebasedpathing'}
 					]
 				},
 				{
@@ -29,8 +30,7 @@ export default defineConfig({
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Overview', slug: 'unity/overview' },
 						{ label: 'GitHub and Unity', slug: 'unity/usinggit'},
-						{ label: 'Interfaces', slug: 'unity/interfaces' },
-						{ label: 'Time-Based Pathing', slug: 'unity/timebasedpathing'}
+						{ label: 'Interfaces', slug: 'unity/interfaces' }
 					],
 				},
 				{
