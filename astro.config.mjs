@@ -1,10 +1,18 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightUtils from "@lorenzo_lewis/starlight-utils";
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
+			plugins: [
+				starlightUtils({
+					navLinks: {
+						leading: { useSidebarLabelled: "leadingNavLinks"},
+					}
+				})
+			],
 			title: '>jakebutf.dev',
             description: 'Notes regarding programming, game development, and software technology.',
 			social: {
@@ -15,6 +23,12 @@ export default defineConfig({
                 './src/styles/custom.css',
               ],
 			sidebar: [
+				{
+					label: 'leadingNavLinks',
+					items: [
+						{ label: 'Projects', slug: 'projects/projects' }
+					]
+				},
 				{
 					label: 'Projects',
 					items: [
