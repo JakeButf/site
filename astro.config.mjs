@@ -13,6 +13,11 @@ export default defineConfig({
 					}
 				})
 			],
+			components: {
+				Hero: './src/components/Hero.astro',
+				AsciiSunset: './src/components/AsciiSunset.astro',
+				LoadScript: './src/components/LoadScript.astro',
+			},
 			title: '>jakebutf.dev',
             description: 'Notes regarding programming, game development, and software technology.',
 			social: {

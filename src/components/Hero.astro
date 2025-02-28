@@ -1,0 +1,73 @@
+---
+// Hero.astro 
+interface HeroAction { text: string; link: string; icon?: string; variant?: string; target?: string; }
+
+interface HeroProps { title: string; tagline: string; image: { file: string }; actions?: HeroAction[]; }
+const { title, tagline, image, actions } = Astro.props as HeroProps;
+---
+<style>
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+    .hero-content {
+      flex: 1;
+      padding-right: 1rem;
+    }
+    .hero-visual {
+      flex: 1;
+      max-width: 50%;
+      overflow: hidden;
+    }
+    /* Ensure the ASCII art wraps or is contained properly */
+    .ascii-sunset {
+      font-family: monospace;
+      white-space: pre-wrap; /* wrap lines if necessary */
+      word-break: break-all; /* break long continuous strings */
+      margin: 0;
+    }
+
+    .hero-actions a.hero-btn {
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    background-color: #c60e00;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+
+  .hero-actions a.hero-btn:hover {
+    background-color: #feb3a6;
+  }
+  </style>
+  
+  <section class="hero">
+    <div class="hero-content">
+      {title && <h1>{title}</h1>}
+      {tagline && <p>{tagline}</p>}
+      {actions && actions.length > 0 && (
+        <div class="hero-actions">
+          {actions.map((action) => (
+            <a 
+              href={action.link} 
+              class={`hero-btn ${action.variant || ''}`}
+              target={action.target || '_self'}
+            >
+              {action.icon && <span class="icon">{action.icon}</span>}
+              {action.text}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+    <div class="hero-visual">
+      <slot name="customHeroImage">
+        {image && <img src={image.file} alt="Hero Image" />}
+      </slot>
+    </div>
+  </section>

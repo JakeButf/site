@@ -1,35 +1,30 @@
 ---
-title: jakebutf.dev
+title: jacob butfiloski
 description: jakebutf homepage
 template: splash
 hero:
-  tagline: Welcome!
-  image:
-    file: ../../assets/cube.webp
+  title: jacob butfiloski
+  tagline: Software Engineer
   actions:
-    - text: View my notes
-      link: /unity/overview/
-      icon: right-arrow
-      variant: primary
-    - text: Check out my GitHub repos
-      link: https://github.com/jakebutf
-      icon: external
+    - text: "My Notes"
+      link: "/unity/overview/"
+      variant: "primary"
+    - text: "My GitHub"
+      link: "https://github.com/jakebutf"
+      target: "_blank"
+      variant: "secondary"
+  image:
+    file: "../../assets/cube.webp"  # fallback image if no custom visual is provided
 ---
+import Hero from '../../components/Hero.astro';
+import AsciiSunset from '../../components/AsciiSunset.astro';
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+<Hero {...frontmatter.hero}>
+  <div slot="customHeroImage">
+    <AsciiSunset />
+  </div>
+</Hero>
 
 <div class="container">
-  <div class="card-container">
-    <CardGrid>
-      <Card title="Project Solstice" icon="laptop">
-        <a href="/projects/projectsolstice/" class="card-link">Click here to view.</a>
-      </Card>
-      <Card title="OpenGL C Renderer" icon="seti:c">
-        <a href="/projects/crenderer/">Click Here to view.</a>
-      </Card>
-      <Card title="dz" icon="seti:cpp">
-        <a href="/projects/dz/">Click Here to view.</a>
-      </Card>
-    </CardGrid>
-  </div>
+  <p>Welcome to my homepage! Here you can find my latest projects, notes, and more.</p>
 </div>

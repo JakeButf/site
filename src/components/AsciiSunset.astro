@@ -1,0 +1,31 @@
+---
+// AsciiSunset.astro
+import asciiFrames from '../assets/ascii-frames.json';
+
+// Convert each frame (an array of strings) into a single string per frame.
+const frames = asciiFrames.map(frame => frame.join("\n"));
+---
+<style>
+    .ascii-sunset {
+  transform: scale(0.3);
+  transform-origin: center; /* Adjust origin as needed */
+}
+
+  .ascii-sunset {
+    font-family: monospace;
+    white-space: pre;
+    line-height: .4;
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 0.2px;
+  }
+</style>
+
+<pre id="asciiSunset" class="ascii-sunset"></pre>
+
+<!-- 
+  Include the external script without any client hydration directive.
+  Ensure that ascii-sunset.client.js is located in your public folder.
+-->
+<script src="/ascii-sunset.client.js" data-frames={JSON.stringify(frames)} defer></script>
+
