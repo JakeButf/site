@@ -32,7 +32,8 @@ export default defineConfig({
 					label: 'leadingNavLinks',
 					items: [
 						{ label: 'Projects', slug: 'projects/projects' },
-						{ label: 'Notes', slug: 'projects/projectsolstice'}
+						{ label: 'Notes', slug: 'projects/projectsolstice'},
+						{ label: 'Resume', slug: 'resume'}
 					]
 				},
 				{
