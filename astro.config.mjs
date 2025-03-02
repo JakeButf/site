@@ -31,7 +31,8 @@ export default defineConfig({
 				{
 					label: 'leadingNavLinks',
 					items: [
-						{ label: 'Projects', slug: 'projects/projects' }
+						{ label: 'Projects', slug: 'projects/projects' },
+						{ label: 'Notes', slug: 'projects/projectsolstice'}
 					]
 				},
 				{
