@@ -59,6 +59,15 @@ export default defineConfig({
 					items: [
 						{ label: 'Sum of Sines Water', slug: 'graphics/sumofsines'},
 					]
+				},
+				{
+					label: 'BotW Reverse Engineering',
+					items: [
+						{label: 'Overview', slug: 'botw-reverse/overview'},
+						{label: 'Getting Started', slug: 'botw-reverse/getting-started'},
+						{label: 'Exefs Dumping', slug: 'botw-reverse/exefsdumping'},
+						{label: 'Setting Up Ghidra', slug: 'botw-reverse/settingupghidra'}
+					]
 				}
 			],
 		}),

@@ -1,0 +1,34 @@
+---
+title: Setting up Ghidra
+description: Description on how to use Ghidra to begin reverse engineering the exefs.
+---
+
+import {Aside} from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Introduction
+Ghidra is a reverse-engineering tool that can be used to translate the assembly code within the exefs into more readable pseudocode.
+This can be very useful to find and document the instructions and their offsets within the executable that we can hook into later.
+
+<Aside>The [Breath of the Wild Decompilation Project](https://botw.link/) recommends the use of [IDA Pro](https://hex-rays.com/ida-pro) over Ghidra due to the more advanced features and the ability to use the decomp projects IDB. However, due to the very steep price tag of IDA Pro I do not use it and do not condone acquiring the software through illicit methods.</Aside>
+
+## Installation
+To begin you will want to download the latest version of [Ghidra](https://ghidra-sre.org/) as well as the [Switch Loader](https://github.com/Adubbz/Ghidra-Switch-Loader).
+
+## Decompiling
+You can now import the previously acquired main.nso and run Ghidra's auto-analysis (this will take a while).
+
+## Tools
+
+<Card title="Repository" icon="github">
+    <p>This section relies on my botw-sym-helper scripts. I recommend checking on the repository to make sure nothing has changed.</p>
+    <a href="https://github.com/JakeButf/botw-sym-helper">Click to view the repository on GitHub.</a>
+</Card>
+
+I would suggest using my [botw-sym-helper](https://github.com/JakeButf/botw-sym-helper) python scripts as they make exporting symbols from Ghidra
+easier while also providing some useful ways to format them. Since a large portion of the Switch RE community uses IDA 
+we do not have all the handy tools for working with the symbols.
+
+### Using the sym scripts
+
+<Aside type="caution">This section is under construction. There may be missing information.</Aside>

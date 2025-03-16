@@ -1,0 +1,21 @@
+---
+title: Exefs Dumping
+description: Description on how to dump exefs from a modded Nintendo Switch
+---
+
+import {Aside} from '@astrojs/starlight/components';
+
+The very first step is to acquire an exefs dump of Breath of the Wild. While there are ways to do so with the use of an emulator, I will not be discussing it due to the current state of Nintendo Switch emulation.
+
+<Aside type='noteπ'>This process requires the use of a Modded Nintendo Switch. If you do not have one, you can use [hactool](https://github.com/SciresM/hactool) to do so. However, keep in mind that you will not have a way to test or run any exefs patches without a modded Nintendo Switch. </Aside>
+
+## nxdumptool
+
+The very first step is to install the [nxdumptool](https://github.com/DarkMatterCore/nxdumptool/releases/tag/rewrite-prerelease) on your modded Nintendo Switch.
+
+This tool will allow you to dump both the romfs and the exefs from your Nintendo Switch onto your computer. For instructions on how to do so, you can view the instructions [here](https://zeldamods.org/wiki/Help:Dumping_games#Dumping_binaries_.28executable_files.29).
+
+<Aside type='danger'>
+ If you misbehave while running Custom Firmware, you are at risk from getting banned from Nintendo online services. If you want to minimize risk, the safest and easiest option is to [block Nintendo DNS servers](https://switch.hacks.guide/extras/blocking_nintendo.html). If you would like to be extra safe, you should backup your eMMC and stay in airplane mode.
+</Aside>
+

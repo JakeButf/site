@@ -1,0 +1,47 @@
+---
+title: Breath of the Wild Reverse Engineering
+description: My notes on reverse engineering The Legend of Zelda Breath of the Wild 1.5.0 and 1.6.0 for the Nintendo Switch
+---
+
+import {Aside} from '@astrojs/starlight/components';
+
+<Aside type='caution'> As this section is extremely a work-in-progress, some information may be outdated or incomplete. To see accurate up-to-date information you can view the [Breath of the Wild Decompilation Project](https://botw.link/)</Aside>
+
+## What is this?
+
+One of my main points of research has been into reverse engineering and documenting the Legend of Zelda: Breath of the Wild
+executable on the Nintendo Switch. This process involves decompiling code with Ghidra, documenting symbols, and allowing custom code to be injected into the exefs.
+
+### What is the exefs?
+
+To put it simply, the exefs is the switches executable filesystem. This filesystem contains multiple executables that Nintendo Switch titles use to run the game. This exefs contains game code and sdk code. The exefs should *not* be confused with the romfs, which instead contains assets for the titles (such as textures and models).
+
+## Why?
+
+Outside of understanding the innerworkings of how Nintendo programmed features of Breath of the Wild, documenting the Breath of the Wild code portion of the exefs allows for exefs modifications or, in other words, Breath of the Wild mods. 
+
+### Why exefs modding?
+
+In the modern Nintendo modding scenes, most "mods" or "cheats" are typically done through dynamically patching the memory of the game at run-time.
+
+<Aside> For an example of this style of modding, you can reference my [dz](/projects/dz) project which does just this for the Nintendo Wii U</Aside>
+
+While this style of modding is great for changing properties and variables, it is highly limited when it comes to code modification. Due to this, general gameplay modifications are not possible.
+
+Exefs modding on the other hand essentially allows us to make direct changes to the source code of the game, which has endless possibilities. To learn more, I would highly recommend looking into the Super Mario Odyssey modding community, as they have created a number of impressive exefs mods.
+
+## What information does this contain/will contain?
+
+The information presented will discuss how to properly decompile/reverse engineer both the 1.5.0 version of the game as well as information regarding the 1.6.0 version of the game. Additionally, there are resources on how to create exefs patches that can run on a real modified Nintendo Switch.
+
+### Why make the distinction between 1.5.0 and 1.6.0?
+
+Due to aggressive compiler optimizations that were implemented with the latest Breath of the Wild release (1.6.0), reverse-engineering and decompiling the latest version is significantly more difficult. For this same reason, the [Breath of the Wild Decompilation Project](https://botw.link/) currently only targets the 1.5.0 version. However, there is demand for exefs modding the 1.6.0 version, so my hope is to do some of the dirty work to help make this version just as viable for exefs modding.
+
+### Why not the Wii U version?
+
+Titles produced for the Wii U use a proprietary compiler known as GHS, the Nintendo Switch on the other hand uses a modified version of clang. This makes the Nintendo Switch version significantly easier to work with.
+
+## Disclaimer
+
+This research does not contain information that would allow acquiring a copy of the game for free, it simply contains information regarding data reverse-engineered from a legal retail copy of the game. Additionally, none of this information is sourced from leaks.
