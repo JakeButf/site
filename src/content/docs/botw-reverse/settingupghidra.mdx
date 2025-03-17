@@ -32,3 +32,12 @@ we do not have all the handy tools for working with the symbols.
 ### Using the sym scripts
 
 <Aside type="caution">This section is under construction. There may be missing information.</Aside>
+
+### Setup 
+After analyzing the executable in Ghidra, navigate to the Script Manager and import then run the ghidramapexport.py 
+to export the projects symbols out to a .map file. This is useful for reading and interacting with these symbols in
+an [exlaunch]() project later down the road.
+
+### Other Scripts
+The other scripts within the repository are useful for formatting the list of symbols exported by the previous script.
+These scripts can help filter out stubs and apply the proper offsets. 
