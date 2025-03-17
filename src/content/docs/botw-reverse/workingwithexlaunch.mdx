@@ -1,0 +1,80 @@
+---
+title: Working With ExLaunch
+description: How to start creating mods with exlaunch.
+---
+
+import {Aside} from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<Card title="Repository" icon="github">
+    <p>To make working with exlaunch easier, I have created a template geared specifically for Breath of the Wild.</p>
+    <p>This repository is very much a work in progress, so the documentation may lag a bit behind it's functionality.</p>
+    <a href="https://github.com/JakeButf/botw-exlaunch-base">Click to view the repository on GitHub.</a>
+</Card>
+
+## What is Exlaunch?
+
+Exlaunch is a framework for injecting C and C++ code into Nintendo Switch games and applications. For our usecase, we can use Exlaunch to hook our own code
+into the Breath of the Wild exefs (executable).
+
+The original repository for Exlaunch can be found [here](https://github.com/shadowninja108/exlaunch). However we will be using a fork I created based off of [this version](https://github.com/enginelesscc/exlaunch-cmake).
+
+<hr/>
+
+## Requirements
+
+You will want to begin by installing the necessary requirements to build Exlaunch. I personally work from Windows 11 with the [Winch WSL](https://apps.microsoft.com/detail/9MZNMNKSM73X?hl=en-us&gl=US&ocid=pdpshare)
+so the information following will be based off of this.
+
+### WSL (Windows Subsystem for Linux)
+As previously stated I use [Winch](https://apps.microsoft.com/detail/9MZNMNKSM73X?hl=en-us&gl=US&ocid=pdpshare). While I would recommend using an Arch Linux based distribution, you can use debian or OSX.
+
+### devkitPro
+devkitPro is a toolchain to help us target various Nintendo consoles, for this usecase you will only need the Nintendo Switch specific tools. 
+
+#### Windows & OSX Systems
+<Aside>I work solely with Windows WSL and have not tried getting this to work on OSX or Windows. If you manage to make this work on these Operating Systems please let me know.</Aside>
+
+[devkitPro installation instructions for Windows & OSX](https://devkitpro.org/wiki/Getting_Started)
+
+#### Arch WSL or Arch Linux
+- Install [devkitPro pacman](https://devkitpro.org/wiki/devkitPro_pacman)
+
+- Install Nintendo Switch tools by running:
+```bash
+sudo (dkp-)pacman -Sy
+sudo (dkp-)pacman -S switch-dev
+sudo (dkp-)pacman -S switch-portlibs
+```
+
+### CMake 
+CMake is how we will build the Exlaunch project.
+
+#### Non-Arch
+If you are not using Arch, you can find the instructions to install CMake [here](https://cmake.org/download/).
+
+#### Arch Linux
+To install on Arch, run:
+```bash
+pacman -Syu cmake
+```
+
+### Exlaunch Base
+Now that you have installed all of the dependencies. You can clone my Breath of the Wild template for Exlaunch.
+
+```bash
+git clone https://github.com/JakeButf/botw-exlaunch-base
+cd botw-exlaunch-base
+git submodule init
+git submodule update
+```
+
+To make sure everything is working, you can build the project by running:
+
+```bash
+make clean-build
+```
+
+This will create a new file called `build` in the root directory that will contain our built files: `main.npdm` and `subsdk9`.
+
+

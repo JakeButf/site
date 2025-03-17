@@ -66,7 +66,8 @@ export default defineConfig({
 						{label: 'Overview', slug: 'botw-reverse/overview'},
 						{label: 'Getting Started', slug: 'botw-reverse/getting-started'},
 						{label: 'Exefs Dumping', slug: 'botw-reverse/exefsdumping'},
-						{label: 'Setting Up Ghidra', slug: 'botw-reverse/settingupghidra'}
+						{label: 'Setting Up Ghidra', slug: 'botw-reverse/settingupghidra'},
+						{label: 'Working with ExLaunch', slug: 'botw-reverse/workingwithexlaunch'}
 					]
 				}
 			],
