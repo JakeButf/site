@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightUtils from "@lorenzo_lewis/starlight-utils";
+import preact from '@astrojs/preact'
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
+		preact(),
 		starlight({
 			plugins: [
 				starlightUtils({
@@ -63,6 +65,7 @@ export default defineConfig({
 				{
 					label: 'BotW Reverse Engineering',
 					items: [
+						{label: '1.6.0 Symbol Search', slug: 'botw-reverse/symbolsearch'},
 						{label: 'Overview', slug: 'botw-reverse/overview'},
 						{label: 'Getting Started', slug: 'botw-reverse/getting-started'},
 						{label: 'Exefs Dumping', slug: 'botw-reverse/exefsdumping'},
@@ -73,4 +76,12 @@ export default defineConfig({
 			],
 		}),
 	],
+	vite: {
+		resolve: {
+			alias: {
+				react: 'preact/compat',
+				'react-dom': 'preact/compat'
+			}
+		}
+	}
 });
