@@ -193,7 +193,7 @@ export default function SearchCSV({ csvUrl }) {
       {loading ? (
         <div className="text-center py-8 text-gray-300">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-gray-700 border-t-transparent"></div>
-          <p className="mt-2">Loading data...</p>
+          <p className="mt-2">Loading data... (This may take a while)</p>
         </div>
       ) : filteredAndSortedData.length === 0 ? (
         <p className="text-center py-4 text-gray-300">No results found.</p>
