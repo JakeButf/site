@@ -1,0 +1,111 @@
+---
+title: Hooking
+description: How to start hooking into functions using ExLaunch
+---
+
+import {Aside} from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+The most useful functionality we get out of using Exlaunch is the ability to hook into the games functions and run our own
+code.
+
+## Trampoline Hook
+
+Trampoline hooking is a method of injecting custom code into a pre-existing method. While Exlaunch does provide some macros
+to accomplish this, I prefer to use a more direct method using function pointers.
+
+Here's an example taken from [``inputs.cpp``](https://github.com/JakeButf/botw-exlaunch-base/blob/main/src/program/inputs.cpp):
+The very first thing we need to do is store the function pointer of the function we are hooking into. In this example, we are using
+an nn function that updates the state of the controller.
+
+```cpp
+using GetNpadStatesFunc = void(*)(nn::hid::NpadFullKeyState*, int, const unsigned int&);
+static GetNpadStatesFunc GetNpadStatesImpl;
+```
+
+Now we want to create the function that will be called in place of ``nn::hid::NpadFullKeyState`` while also calling the original function:
+
+```cpp
+static void UpdateControllerStateHook(nn::hid::NpadFullKeyState* state, int port, const unsigned int& style) {
+    GetNpadStatesImpl(state, port, style); //original function
+
+    inputs::UpdateControllerState(); //our code to be run
+}
+```
+
+Now we need to hook our new function in place of the old one:
+
+<Aside>While we technically could not call the original function in our new function and instead set trampoline 
+to true, this method could allow us to change arguments before they get to the original functions implementation.</Aside>
+
+```cpp
+void inputs::InitHooks()
+{
+    GetNpadStatesImpl = exl::hook::HookFunc<GetNpadStatesFunc>(
+        &nn::hid::GetNpadStates, //function pointer to the original implementation
+        UpdateControllerStateHook, //our new function
+        false //run function as trampline. since we call the original function in the new function we do not need this to be true
+    );
+}
+```
+
+Lastly, we want to make sure we are initializing the hooking environment and calling our ``inputs::InitHooks()`` in ``main.cpp``:
+
+```cpp
+
+extern "C" void exl_main(void* x0, void* x1) 
+{
+    // Setup hooking enviroment
+    envSetOwnProcessHandle(exl::util::proc_handle::Get());
+    exl::hook::Initialize();
+
+    //Init Hooks
+    inputs::InitHooks();
+}
+```
+
+## Replace Hook
+
+While trampoline hooks keep the original implementation of function, replace hooks completely replace the functionality.
+
+Going back to our inputs example, we can avoid calling the original implementation in our hooking function like so:
+
+```cpp
+static void UpdateControllerStateHook(nn::hid::NpadFullKeyState* state, int port, const unsigned int& style) 
+{
+    inputs::UpdateControllerState(); //only our code is in the hooking function
+}
+```
+
+We also want to make sure we are setting trampoline to false:
+
+```cpp
+void inputs::InitHooks()
+{
+    GetNpadStatesImpl = exl::hook::HookFunc<GetNpadStatesFunc>(
+        &nn::hid::GetNpadStates, //function pointer to the original implementation
+        UpdateControllerStateHook, //our new function
+        false //trampoline is false
+    );
+}
+```
+
+Just like before we need to initialize the hooking environment and initialize our hooks:
+
+
+Lastly, we want to make sure we are initializing the hooking environment and calling our ``inputs::InitHooks()`` in ``main.cpp``:
+
+```cpp
+
+extern "C" void exl_main(void* x0, void* x1) 
+{
+    // Setup hooking enviroment
+    envSetOwnProcessHandle(exl::util::proc_handle::Get());
+    exl::hook::Initialize();
+
+    //Init Hooks
+    inputs::InitHooks();
+}
+```
+
+## Inline Hook

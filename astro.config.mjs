@@ -70,7 +70,8 @@ export default defineConfig({
 						{label: 'Getting Started', slug: 'botw-reverse/getting-started'},
 						{label: 'Exefs Dumping', slug: 'botw-reverse/exefsdumping'},
 						{label: 'Setting Up Ghidra', slug: 'botw-reverse/settingupghidra'},
-						{label: 'Working with ExLaunch', slug: 'botw-reverse/workingwithexlaunch'}
+						{label: 'Working with ExLaunch', slug: 'botw-reverse/workingwithexlaunch'},
+						{label: 'Hooking', slug: 'botw-reverse/hooking'}
 					]
 				}
 			],
