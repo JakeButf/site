@@ -51,6 +51,7 @@ export default defineConfig({
 					label: 'LeetCode',
 					items: [
 						{ label: 'Products of Array Except Self', slug: 'lc/productsofarrayexceptself' },
+						{ label: 'Two Sum', slug: 'lc/twosum' }
 					]
 
 				},
