@@ -1,0 +1,122 @@
+---
+title: Products of Array Except Self
+description: Taken From neetcode.io/problems/products-of-array-discluding-self
+---
+#### Medium Difficulty
+
+## Problem
+Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
+Each product is guaranteed to fit in a 32-bit integer.
+
+Follow-up: Could you solve it in O(n)O(n) time without using the division operation?
+
+Example 1:
+`Input: nums = [1,2,4,6]`
+`Output: [48,24,12,8]`
+
+Example 2:
+`Input: nums = [-1,0,1,2,3]`
+`Output: [0,-6,0,0,0]`
+
+Constraints:
+`2 <= nums.length <= 1000`
+`-20 <= nums[i] <= 20`
+
+## My First Solution:
+```cs
+public class Solution {
+    public int[] ProductExceptSelf(int[] nums) {        
+        List<int> Products = new List<int>{};
+
+        for(int x = 0; x < nums.Length; x++)
+        {
+            int runningCount = 1;
+            for(int y = 0; y < nums.Length; y++)
+            {
+                if(y == x)
+                {
+                    continue;
+                }
+
+                runningCount*= nums[y];
+            }
+            Products.Add(runningCount);
+        }
+
+        return Products.ToArray();
+    }
+
+}
+```
+Time Complexity: O(n^2)
+
+### Thoughts/Notes
+
+I believe that the medium difficulty of this problem doesn't actually come from finding *a* solution, it's from having to find the O(n) solution. A solution that works is immediately obvious by nesting a for loop to ignore the 'current' index. The reason I went for this solution was because you can easily hold onto an index while looping throughout the rest of the array, since you are holding onto the index (x in this case) you can very easily check if the current index you are iterating through is equal to the index you are holding. If anything, this is a test to see if you know what `continue` does.
+
+However, the real challenge is an O(n) solution.
+
+## Second Solution O(n):
+```cs
+public class Solution {
+    public int[] ProductExceptSelf(int[] nums) {        
+        List<int> ltr = new List<int>{}; //stores running product left to right
+        List<int> rtl = new List<int>{}; //stores running product right to left
+        List<int> products = new List<int>{}; //store final result
+        int runningTotal = 1; //value to store the running total of the products
+
+        //calculate the tlr array
+        foreach(int i in nums)
+        {
+            runningTotal *= i;
+            ltr.Add(runningTotal);
+        }
+
+        runningTotal = 1; //reset the running total
+
+        //calculate rtl array
+        for(int i = nums.Length - 1; i >= 0; i--)
+        {
+            runningTotal *= nums[i];
+            rtl.Add(runningTotal); 
+        }
+
+        //reverse the array for later use
+        rtl.Reverse();
+
+        //crux of the solution:
+        //we want to go through both ltr and rtl in order to multiply
+        //the values before the index (in ltr) and after the index (in rtl)
+        //in practice this gives you the product of the array excluding the index
+        for(int i = 0; i < nums.Length; i++)
+        {
+            int pre = 1;
+            int post = 1;
+            if(i != 0)
+            {
+                pre = ltr[i - 1];
+            }
+
+            if(i + 1 < nums.Length)
+            {
+                post = rtl[i + 1];
+            }
+
+            products.Add(pre * post);
+        }
+        return products.ToArray();
+    }
+
+}
+```
+
+### Thoughts / Notes
+This was significantly harder to figure out compared to the original solution. While I did leave comments explaining how this solution works in the code snippit, heres a breakdown:
+
+*Prefix/Postfix:*
+
+Essentially what we need to do is generate the product *before* the index of our number and multiply it by the product *after* the index. To accomplish this, we create two arrays (I called them ltr and rtl) both arrays store each step of the product in opposite orders. Then, to get the product of the array excluding our index, we just have to multiply the step prior to our index (in left to right) vs. the step after our index (in right to left).
+
+*Overall Thoughts:*
+
+This one is really tricky to figure out right off the bat. Not much to say other than that.

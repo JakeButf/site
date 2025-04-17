@@ -11,7 +11,7 @@ export default defineConfig({
 			plugins: [
 				starlightUtils({
 					navLinks: {
-						leading: { useSidebarLabelled: "leadingNavLinks"},
+						leading: { useSidebarLabelled: "leadingNavLinks" },
 					}
 				})
 			],
@@ -21,57 +21,64 @@ export default defineConfig({
 				LoadScript: './src/components/LoadScript.astro',
 			},
 			title: '>jakebutf.dev',
-            description: 'Notes regarding programming, game development, and software technology.',
+			description: 'Notes regarding programming, game development, and software technology.',
 			social: {
 				github: 'https://github.com/jakebutf',
-                linkedin: 'https://www.linkedin.com/in/jacob-butfiloski-061ba2276/'
+				linkedin: 'https://www.linkedin.com/in/jacob-butfiloski-061ba2276/'
 			},
-            customCss: [
-                './src/styles/custom.css',
-              ],
+			customCss: [
+				'./src/styles/custom.css',
+			],
 			sidebar: [
 				{
 					label: 'leadingNavLinks',
 					items: [
 						{ label: 'Projects', slug: 'projects/projects' },
-						{ label: 'Notes', slug: 'projects/projectsolstice'},
-						{ label: 'Resume', slug: 'resume'}
+						{ label: 'Notes', slug: 'projects/projectsolstice' },
+						{ label: 'Resume', slug: 'resume' }
 					]
 				},
 				{
 					label: 'Projects',
 					items: [
 						{ label: 'Project Solstice', slug: 'projects/projectsolstice' },
-						{ label: 'dz', slug: 'projects/dz'},
-						{ label: 'C Renderer', slug: 'projects/crenderer'},
-						{ label: 'Time-Based Pathing', slug: 'projects/timebasedpathing'}
+						{ label: 'dz', slug: 'projects/dz' },
+						{ label: 'C Renderer', slug: 'projects/crenderer' },
+						{ label: 'Time-Based Pathing', slug: 'projects/timebasedpathing' }
 					]
+				},
+				{
+					label: 'LeetCode',
+					items: [
+						{ label: 'Products of Array Except Self', slug: 'lc/productsofarrayexceptself' },
+					]
+
 				},
 				{
 					label: 'Unity',
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Overview', slug: 'unity/overview' },
-						{ label: 'GitHub and Unity', slug: 'unity/usinggit'},
+						{ label: 'GitHub and Unity', slug: 'unity/usinggit' },
 						{ label: 'Interfaces', slug: 'unity/interfaces' }
 					],
 				},
 				{
 					label: 'Graphics',
 					items: [
-						{ label: 'Sum of Sines Water', slug: 'graphics/sumofsines'},
+						{ label: 'Sum of Sines Water', slug: 'graphics/sumofsines' },
 					]
 				},
 				{
 					label: 'BotW Reverse Engineering',
 					items: [
-						{label: '1.6.0 Symbol Search', slug: 'botw-reverse/symbolsearch'},
-						{label: 'Overview', slug: 'botw-reverse/overview'},
-						{label: 'Getting Started', slug: 'botw-reverse/getting-started'},
-						{label: 'Exefs Dumping', slug: 'botw-reverse/exefsdumping'},
-						{label: 'Setting Up Ghidra', slug: 'botw-reverse/settingupghidra'},
-						{label: 'Working with ExLaunch', slug: 'botw-reverse/workingwithexlaunch'},
-						{label: 'Hooking', slug: 'botw-reverse/hooking'}
+						{ label: '1.6.0 Symbol Search', slug: 'botw-reverse/symbolsearch' },
+						{ label: 'Overview', slug: 'botw-reverse/overview' },
+						{ label: 'Getting Started', slug: 'botw-reverse/getting-started' },
+						{ label: 'Exefs Dumping', slug: 'botw-reverse/exefsdumping' },
+						{ label: 'Setting Up Ghidra', slug: 'botw-reverse/settingupghidra' },
+						{ label: 'Working with ExLaunch', slug: 'botw-reverse/workingwithexlaunch' },
+						{ label: 'Hooking', slug: 'botw-reverse/hooking' }
 					]
 				}
 			],
