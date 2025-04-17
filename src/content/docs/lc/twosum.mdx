@@ -1,0 +1,59 @@
+---
+title: Two Sum 
+description: Taken From neetcode.io/problems/products-of-array-discluding-self
+---
+#### Medium Difficulty
+
+## Problem
+
+Given an array of integers nums and an integer target, return the indices i and j such that nums[i] + nums[j] == target and i != j.
+You may assume that every input has exactly one pair of indices i and j that satisfy the condition.
+Return the answer with the smaller index first.
+
+## My First Solution:
+```js
+twoSum(nums, target) {
+	var solution = [];
+
+	for (let x = 0; x < nums.length; x++) {
+		for (let y = 0; y < nums.length; y++) {
+			if (x == y) break;
+			if (nums[x] + nums[y] == target) {
+				solution.push(x);
+				solution.push(y);
+				solution.sort();
+				return solution;				}
+		}
+	}
+}
+```
+Time Complexity: O(n^2)
+
+### Thoughts/Notes
+
+This is one of the easiest problems to get a working solution. I had a little bit of trouble with errors at the beginning because I was just rushing through it and not really thinking about what I was doing. For example, I accidentally returned the solution array at the very end of the function (as you often do in an algorithm based problem). But this breaks whenever there are multiple potential solution combinations.
+
+However, this is solution is O(n^2), and the O(n) solution ended up being much more interesting than I thought.
+
+## My Second Solution (O(n)):
+```js
+twoSum(nums, target) {
+	var indices = new Map();
+
+	for (let i = 0; i < nums.length; i++) {
+		indices.set(nums[i], i); //this sorts the indexes by their values.
+	}
+
+	for (let i = 0; i < nums.length; i++) {
+		let difference = target - nums[i]; //difference is the number we are searching for
+		if (indices.get(difference) !== undefined && indices.get(difference) !== i) {
+			return [i, indices.get(difference)];
+		}
+	}
+}
+```
+
+### Thoughts/Notes
+This solution kind of challenges the way that you think about arrays. In order to get an O(n) solution, you need to kind of reverse how a traditional array works. In a traditional array, you find a value through it's index. However for this solution we need to use a hashmap (implemented through ES6's Map) in order to find an index by it's value. The reason for this is we want to retrieve the index of the number that will equal target. The crux of this concept comes from subtracting the target by a number from our `nums` array and checking if it is a valid key in our indices map.
+
+Two Sum is a generally very easy problem but it's O(n) solution is pretty fun to figure out!
