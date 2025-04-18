@@ -44,7 +44,7 @@ void inputs::InitHooks()
     GetNpadStatesImpl = exl::hook::HookFunc<GetNpadStatesFunc>(
         &nn::hid::GetNpadStates, //function pointer to the original implementation
         UpdateControllerStateHook, //our new function
-        false //run function as trampline. since we call the original function in the new function we do not need this to be true
+        false //run function as trampoline. since we call the original function in the new function we do not need this to be true
     );
 }
 ```
@@ -55,7 +55,7 @@ Lastly, we want to make sure we are initializing the hooking environment and cal
 
 extern "C" void exl_main(void* x0, void* x1) 
 {
-    // Setup hooking enviroment
+    // Setup hooking environment
     envSetOwnProcessHandle(exl::util::proc_handle::Get());
     exl::hook::Initialize();
 

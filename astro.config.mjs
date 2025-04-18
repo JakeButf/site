@@ -54,6 +54,7 @@ export default defineConfig({
 						{ label: 'Two Sum', slug: 'lc/twosum' },
 						{ label: 'Contains Duplicate', slug: 'lc/containsduplicate' },
 						{ label: 'Valid Anagram', slug: 'lc/validanagram' },
+						{ label: 'Top K Frequent Elements', slug: 'lc/topkfrequentelements' },
 					]
 
 				},

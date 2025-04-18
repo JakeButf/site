@@ -1,0 +1,40 @@
+---
+title: Top K Frequent Elements 
+description: Taken From neetcode.io/problems/products-of-array-discluding-self
+---
+
+#### Medium Difficulty
+
+## Problem
+Given an integer array nums and an integer k, return the k most frequent elements within the array.
+The test cases are generated such that the answer is always unique.
+You may return the output in any order.
+
+## First Solution
+
+```js
+class Solution {
+	/**
+	 * @param {number[]} nums
+	 * @param {number} k
+	 * @return {number[]}
+	 */
+	topKFrequent(nums, k) {
+		let frequencies = new Map();
+
+		for (let num of nums) {
+			frequencies.set(num, (frequencies.get(num) | 0) + 1)
+		}
+
+		const sortedArray = Array.from(frequencies).sort((a, b) => b[1] - a[1]);
+		let results = [];
+		for (let i = 0; i < k; i++) {
+			results.push(sortedArray[i][0]);
+		}
+
+		return results;
+	}
+}```
+
+### Thoughts/Notes
+This problem conceptually is fairly simple in my opinion. All you really need is some method to tie a number and it's frequency together, which in my case I used a hashmap. From here, you can convert it into an array and sort it so that the most frequent numbers are at the beginning of the array. From here it's as simply as getting the top `k` frequent numbers and returning them as an array. The actual hardest part of this problem to me was the process of converting the map to an array and then sorting it, since switching to JavaScript for DSA problems I have had a little bit of trouble remembering hwo to properly use some of the array manipulation functions. Overall though this problem is a breeze.
