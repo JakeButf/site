@@ -52,7 +52,8 @@ export default defineConfig({
 					items: [
 						{ label: 'Products of Array Except Self', slug: 'lc/productsofarrayexceptself' },
 						{ label: 'Two Sum', slug: 'lc/twosum' },
-						{ label: 'Contains Duplicate', slug: 'lc/containsduplicate' }
+						{ label: 'Contains Duplicate', slug: 'lc/containsduplicate' },
+						{ label: 'Valid Anagram', slug: 'lc/validanagram' },
 					]
 
 				},
