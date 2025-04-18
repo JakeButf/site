@@ -1,0 +1,32 @@
+---
+title: Valid Anagram
+description: Taken From neetcode.io/problems/products-of-array-discluding-self 
+---
+
+## Problem
+
+```js
+class Solution {
+	/**
+	 * @param {string} s
+	 * @param {string} t
+	 * @return {boolean}
+	 */
+	isAnagram(s, t) {
+		let sArr = s.split('');
+		let tArr = t.split('');
+
+		sArr.sort();
+		tArr.sort();
+
+		let resS = sArr.toString();
+		let resT = tArr.toString();
+
+		return resS === resT;
+	}
+}
+```
+Time Complexity: O(n)
+
+### Thoughts/Notes
+This is a very simple problem. It's also very easy to accomplish in O(n) time by: coverting the strings to arrays, sorting them, then check if they are the same.
