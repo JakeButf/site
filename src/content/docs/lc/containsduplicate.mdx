@@ -1,0 +1,62 @@
+---
+title: Products of Array Except Self
+description: Taken From neetcode.io/problems/products-of-array-discluding-self
+---
+
+#### Easy Difficulty
+
+## Problem
+
+Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
+
+## First Solution
+
+```js
+class Solution {
+	/**
+	 * @param {number[]} nums
+	 * @return {boolean}
+	 */
+	hasDuplicate(nums) {
+		let seen = [];
+		let dupe = false;
+		nums.forEach((num) => {
+			if (seen.includes(num)) {
+				dupe = true;
+			}
+			seen.push(num);
+		})
+		return dupe;
+	}
+}
+```
+Time Complexity: O(n^2)
+
+### Thoughts/Notes
+
+This was a very easy problem to solve, just keep track of elements you've seen and then check if any of them are already seen. However, since I used .includes, this is time complexity O(n^2). However an O(n) solution is super easy.
+
+## Second Solution
+
+```js
+class Solution {
+	/**
+	 * @param {number[]} nums
+	 * @return {boolean}
+	 */
+	hasDuplicate(nums) {
+		let sorted = nums;
+		sorted.sort();
+
+		for (let i = 1; i < nums.length; i++) {
+			if (sorted[i] === sorted[i - 1]) return true;
+		}
+
+		return false;
+	}
+}
+```
+
+### Thoughts/Notes
+
+Almost an easier solution to the original. The crux is just sorting the array and then checking if there's an identical element next to it.
