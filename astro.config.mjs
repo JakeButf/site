@@ -55,6 +55,7 @@ export default defineConfig({
 						{ label: 'Contains Duplicate', slug: 'lc/containsduplicate' },
 						{ label: 'Valid Anagram', slug: 'lc/validanagram' },
 						{ label: 'Top K Frequent Elements', slug: 'lc/topkfrequentelements' },
+						{ label: 'Group Anagrams', slug: 'lc/groupanagrams' },
 					]
 
 				},
