@@ -1,0 +1,74 @@
+---
+title: Security 
+description: An overview of AWS Security 
+---
+
+## Shared Responsibility Model
+
+The shared responsibility model defines security roles between AWS and the customer. AWS is responsible for security of the cloud, and the customer is responsible for security in the cloud.
+
+Customers are responsible for configuring and managing resources, controlling access, and securing data. AWS manages the infrastructure, including physical data centers, hardware, networking, and virtualization.
+
+## AWS Identity and Access Management (IAM)
+
+IAM enables secure access to AWS services and resources. It includes:
+
+- IAM users: unique identities with credentials
+- IAM groups: collections of users with shared permissions
+- IAM roles: temporary access to permissions
+- IAM policies: documents that define allowed or denied actions
+- Multi-factor authentication (MFA): adds extra security by requiring a second verification step
+
+Best practices include using IAM users instead of the root user, enabling MFA, applying least privilege, and managing access through groups and roles.
+
+## AWS Organizations
+
+AWS Organizations lets you centrally manage multiple AWS accounts. It supports:
+
+- Service control policies (SCPs): restrict access across accounts
+- Organizational units (OUs): group accounts with similar requirements
+- Centralized billing: consolidate account charges
+
+By grouping accounts into OUs, you can apply policies to specific departments and isolate workloads as needed.
+
+## AWS Artifact
+
+AWS Artifact provides access to security and compliance documents. It includes:
+
+- Artifact Agreements: legal agreements between AWS and customers
+- Artifact Reports: third-party compliance audit reports
+
+These documents help organizations meet regulatory requirements and provide proof of compliance.
+
+## Denial-of-Service (DoS) and Distributed Denial-of-Service (DDoS) Attacks
+
+A DoS attack floods a service with traffic to make it unavailable. A DDoS attack uses multiple sources to amplify the attack.
+
+### AWS Shield
+
+AWS Shield protects against DDoS attacks. It includes:
+
+- Shield Standard: automatic protection for all AWS customers at no cost
+- Shield Advanced: paid service with deeper diagnostics, real-time metrics, and integration with AWS WAF
+
+## AWS Key Management Service (KMS)
+
+AWS KMS manages encryption keys for securing data. It supports:
+
+- Encryption at rest and in transit
+- Centralized key control
+- Role-based access to keys
+
+Keys never leave KMS, and access can be temporarily disabled.
+
+## AWS WAF
+
+AWS WAF is a web application firewall. It allows or blocks traffic based on configured rules in a web access control list (ACL). It works with services like CloudFront and Application Load Balancer. You can block malicious IPs or allow legitimate traffic. Rules can be customized to meet application security needs.
+
+## Amazon Inspector
+
+Amazon Inspector performs automated security assessments on AWS workloads. It identifies vulnerabilities, misconfigurations, and deviations from best practices. Findings are prioritized and include remediation recommendations.
+
+## Amazon GuardDuty
+
+Amazon GuardDuty provides continuous threat detection. It monitors AWS accounts and network activity using sources like VPC Flow Logs and DNS logs. GuardDuty produces findings with suggested actions. You can integrate with Lambda to automate remediation.

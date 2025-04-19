@@ -1,0 +1,122 @@
+---
+title: AWS Infrastructure and Reliability
+description: An overview of AWS' global infrastructure and reliability 
+---
+
+## Selecting a Region
+
+When choosing an AWS Region for your services, applications, and data, consider the following four key business factors:
+
+### Compliance with Data Governance and Legal Requirements
+- Some businesses must store and process data within specific geographic boundaries.
+- Example: A company requiring data to stay in the UK would select the London Region.
+- If no legal restrictions apply, other factors may take priority.
+
+### Proximity to Customers
+- Choosing a Region closer to your users helps reduce latency and improve performance.
+- Example: A Washington, DC-based company with customers in Singapore might deploy applications in the Singapore Region for faster content delivery.
+
+### Available Services in the Region
+- Not all AWS services are available in every Region.
+- Some features, such as Amazon Braket, are only offered in select Regions.
+- Be sure to verify service availability before selecting a Region for your application.
+
+### Pricing Differences
+- Service pricing can vary significantly by Region.
+- Example: Due to tax differences, running a workload in the São Paulo Region might cost 50% more than in the Oregon Region.
+- Consider regional pricing when planning your infrastructure.
+
+## Availability Zones
+An Availability Zone (AZ) is one or more data centers within an AWS Region. Each Region contains multiple AZs that are: located tens of miles apart for fault tolerance and close enough to maintain low latency between them
+
+### Purpose of Availability Zones
+
+- Designed to reduce the risk of a single point of failure
+- Provide high availability and resilience
+- Help maintain application uptime even during localized outages
+
+### Example: Running EC2 Instances
+
+Single Availability Zone Setup:
+
+- An application runs on an EC2 instance in us-west-1a (Northern California).
+- If us-west-1a fails, the application becomes unavailable.
+
+Multiple Availability Zones Setup:
+
+- A second EC2 instance is deployed in us-west-1b.
+- If us-west-1a fails, the application continues to run in us-west-1b.
+
+### Best Practice
+
+To increase availability and fault tolerance, always run applications across at least two Availability Zones within a Region.
+
+
+## Edge Locations
+
+An edge location is a site used by Amazon CloudFront to cache copies of content closer to customers for faster delivery.
+
+### How It Works
+
+- Your original data (the origin) may be stored in a distant AWS Region.
+- Instead of serving data directly from the origin, CloudFront caches the data at an edge location near the customer.
+- When a customer requests content, CloudFront delivers it from the nearest edge location, reducing latency and improving performance.
+
+### Example
+
+- A customer in China requests a file.
+- CloudFront checks the edge location cache near China.
+  - If the file is cached there, it’s delivered quickly to the customer.
+  - If not, it’s retrieved from the origin in Brazil, cached at the edge location, and then delivered.
+
+## Ways to Interact with AWS Services
+
+AWS provides multiple methods to access and manage its services, depending on your preferences and use case.
+
+### AWS Management Console
+
+- A web-based interface for managing AWS services.
+- Features search, wizards, and automated workflows to simplify tasks.
+- Includes a mobile app for monitoring resources, viewing alarms, and checking billing.
+- Supports multiple simultaneous logins on the mobile app.
+
+### AWS Command Line Interface (AWS CLI)
+
+- A command-line tool for managing AWS services.
+- Available for Windows, macOS, and Linux.
+- Allows for automation via scripts (such as launching EC2 instances and configuring Auto Scaling groups).
+- Reduces time and effort when performing repetitive tasks.
+
+### Software Development Kits (SDKs)
+
+- Provide language-specific APIs for accessing AWS services.
+- Allow integration with existing applications or development of new applications on AWS.
+- SDKs are available for languages including C++, Java, .NET, Python, and more.
+- AWS offers documentation and sample code for supported languages to help you get started.
+
+## AWS Elastic Beanstalk and AWS CloudFormation
+
+### AWS Elastic Beanstalk
+
+AWS Elastic Beanstalk is a Platform as a Service that simplifies application deployment.
+
+- You upload your code and configuration settings
+Elastic Beanstalk automatically handles:
+- Capacity adjustments
+- Load balancing
+- Automatic scaling
+- Application health monitoring
+
+It is ideal for developers who want to deploy applications without managing the underlying infrastructure.
+
+### AWS CloudFormation
+
+AWS CloudFormation enables Infrastructure as Code (IaC).
+
+- You define your infrastructure in code templates
+- CloudFormation provisions and configures resources automatically
+Benefits include:
+- Safe, repeatable deployments
+- Automation without writing custom scripts
+- Error handling with automatic rollback of failed changes
+

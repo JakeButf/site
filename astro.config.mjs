@@ -60,6 +60,22 @@ export default defineConfig({
 
 				},
 				{
+					label: 'AWS Cloud Practitioner',
+					items: [
+						{ label: 'What is AWS?', slug: 'awsccp/whatisaws' },
+						{ label: 'Cloud Computing', slug: 'awsccp/cloudcomputing' },
+						{ label: 'Amazon Elastic Compute Cloud (EC2)', slug: 'awsccp/ec2' },
+						{ label: 'Monolithic Applications and Microservices', slug: 'awsccp/microservices' },
+						{ label: 'Serverless Computing & Containers', slug: 'awsccp/serverless' },
+						{ label: 'AWS Infrastructure and Reliability', slug: 'awsccp/infastructure' },
+						{ label: 'Networking', slug: 'awsccp/networking' },
+						{ label: 'Storage & Databases', slug: 'awsccp/storageanddatabases' },
+						{ label: 'Security', slug: 'awsccp/security' },
+						{ label: 'Monitoring and Analytics', slug: 'awsccp/monitoringandanalytics' },
+
+					]
+				},
+				{
 					label: 'Unity',
 					items: [
 						// Each item here is one entry in the navigation menu.

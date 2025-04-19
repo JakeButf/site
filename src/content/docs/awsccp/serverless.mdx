@@ -1,0 +1,52 @@
+---
+title: Serverless Computing & Containers 
+description: An overview of serverless computing and containers 
+---
+## Serverless Computing and Containers
+
+### Serverless Computing
+
+With traditional Amazon EC2 usage, you must:
+- Provision virtual servers
+- Upload and run your code
+- Manage the servers continuously
+
+Serverless computing allows you to run code without provisioning or managing servers. Your code still runs on servers, but AWS handles the infrastructure for you. It also automatically scales based on usage.
+
+### AWS Lambda
+
+AWS Lambda is AWS's serverless computing service.
+
+- Upload your code to Lambda
+- Set an event trigger (e.g., S3 uploads, HTTP requests)
+- Lambda runs the code only when triggered
+- You pay only for the compute time used
+
+Example: A Lambda function automatically resizes images when new ones are uploaded to the cloud. The code runs only during uploads, reducing costs and overhead.
+
+### Containers
+
+Containers provide a consistent environment for your applications by packaging code and dependencies together.
+
+#### Benefits
+- Portability between development and production
+- Efficient use of resources
+- Suitable for applications requiring scalability, security, and reliability
+
+#### Example: One Host, Multiple Containers
+- Developers and operations teams may use different environments
+- Containers help ensure consistency across these environments
+
+#### Example: Scaling to Many Hosts
+- Running tens or hundreds of containers across multiple hosts
+- Requires tools for managing performance, security, logging, and more
+
+---
+
+### Amazon Elastic Container Service (Amazon ECS)
+
+Amazon ECS is a container orchestration service that helps manage and scale containerized applications.
+
+- Supports Docker containers
+- Allows you to launch and stop containers using API calls
+- Supports both Docker Community and Enterprise editions

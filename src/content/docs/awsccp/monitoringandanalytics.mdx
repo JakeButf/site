@@ -1,0 +1,64 @@
+---
+title: Monitoring and Analytics 
+description: An overview of AWS' monitoring and analytics
+---
+
+## Amazon CloudWatch
+
+Amazon CloudWatch is a monitoring and observability service. It collects and tracks metrics, collects log files, sets alarms, and automatically reacts to changes in your AWS environment.
+
+### Metrics
+
+Metrics represent data points for your resources. AWS services send metrics to CloudWatch, which can generate graphs to show performance over time.
+
+### CloudWatch Alarms
+
+You can create alarms to automatically perform actions when a metric crosses a specified threshold. 
+
+Example: Create an alarm to stop an Amazon EC2 instance if CPU utilization remains low for a certain period.
+
+### CloudWatch Dashboard
+
+The dashboard allows you to view and organize all resource metrics in a single location. Dashboards can be customized for different applications, business units, or use cases.
+
+## AWS CloudTrail
+
+AWS CloudTrail records API calls made in your AWS account. It provides details such as:
+
+- Who made the call
+- What action was taken
+- When it occurred
+- Where the request came from
+
+CloudTrail creates a history of AWS API activity for auditing and troubleshooting.
+
+### CloudTrail Event Example
+
+If a new IAM user is created and you want to know how and when, you can use CloudTrail to find the event. You can filter events by time, resource type, user, and API action.
+
+### CloudTrail Insights
+
+CloudTrail Insights detects unusual activity in your account, such as a spike in the number of EC2 instance launches. It helps you investigate and respond to unexpected behavior.
+
+## AWS Trusted Advisor
+
+AWS Trusted Advisor provides real-time recommendations to help you follow AWS best practices across five categories:
+
+- Cost optimization
+- Performance
+- Security
+- Fault tolerance
+- Service limits
+
+Trusted Advisor checks your environment and suggests actions you can take to improve it.
+
+### Trusted Advisor Dashboard
+
+The dashboard displays the results of completed checks. Icons indicate status:
+
+- Green check: no issues found
+- Orange triangle: investigation recommended
+- Red circle: action required
+
+Trusted Advisor is useful for both new and ongoing projects to improve resource configuration and operational efficiency.
+

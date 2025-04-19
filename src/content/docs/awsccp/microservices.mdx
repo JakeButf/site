@@ -1,0 +1,66 @@
+---
+title: Monolithic Applications and Microservices
+description: An overview of monolithic applications and microservices. 
+---
+
+## Monolithic Applications and Microservices
+
+### Monolithic Applications
+
+Applications consist of multiple tightly coupled components such as databases, servers, user interface, and business logic. All components are interconnected and dependent on one another. If one component fails, it can cause the entire application to fail. This architecture can be difficult to scale and maintain as applications grow.
+
+### Microservices
+
+In a microservices architecture, components are loosely coupled and communicate independently. If one component fails, the rest of the application continues to function. This approach improves availability, flexibility, and fault tolerance.
+
+### AWS and Microservices
+
+AWS supports microservices architecture through services like:
+  - Amazon Simple Notification Service – for pub/sub messaging
+  - Amazon Simple Queue Service – for message queuing
+
+## Amazon Simple Notification Service (Amazon SNS)
+
+Amazon SNS is a publish/subscribe (pub/sub) messaging service that allows a publisher to send messages to multiple subscribers through topics.
+
+### How Does It Work?
+
+A publisher sends messages to an SNS topic. Subscribers (such as web servers, email addresses, or AWS Lambda functions) receive those messages if they are subscribed to the topic.
+
+### Example
+
+A coffee shop sends one newsletter that includes all updates (coupons, trivia, new products). All subscribers receive every type of update, regardless of interest.
+
+The coffee shop splits the newsletter into separate topics: coupons, coffee trivia, and new products. Customers can subscribe only to the topics they care about. One customer subscribes to coupons only, another to coffee trivia, and a third to both trivia and new products. This structure allows more targeted communication, improving user experience and reducing unwanted messages.
+
+Amazon SNS is useful for decoupling components and enabling real-time updates across distributed systems.
+
+## Amazon Simple Queue Service (Amazon SQS)
+
+Amazon SQS is a message queuing service that enables communication between decoupled software components by sending, storing, and receiving messages reliably.
+
+### Features
+
+- Messages are placed into a queue by one component (sender).
+- Another component (receiver) retrieves, processes, and deletes the message from the queue.
+- Ensures reliable communication even if the receiver is unavailable at the time the message is sent.
+
+### Example
+
+Without a queue:
+
+- The cashier takes an order and immediately delivers it to the barista.
+- If the barista is busy or unavailable, the cashier has to wait.
+- This causes delays and inefficiencies.
+
+With a queue (SQS):
+
+- The cashier takes an order and places it into a queue (like an order board).
+- The barista checks the queue when ready, retrieves the next order, prepares the drink, and removes the order from the queue.
+- Meanwhile, the cashier continues to take new orders without waiting.
+
+### Benefits
+
+- Decouples application components for better scalability and fault tolerance.
+- Prevents message loss and allows components to operate independently and asynchronously.
+- Improves efficiency in systems where producers and consumers operate at different speeds.

@@ -1,0 +1,117 @@
+---
+title: Networking 
+description: An overview of cloud computing 
+---
+
+## Connectivity to AWS
+### Amazon Virtual Private Cloud (Amazon VPC)
+
+Amazon VPC is a networking service that enables you to provision an **isolated section** of the AWS Cloud. Within a VPC, you can:
+
+- Define a virtual network to launch your AWS resources
+- Organize resources into subnets (smaller segments within the VPC)
+
+VPCs provide network boundaries that restrict and control traffic flow between AWS customers and services.
+
+### Internet Gateway
+
+- Connects your VPC to the **public internet**
+- Enables public traffic to access resources like Amazon EC2 instances
+- Similar to a doorway that lets customers enter a coffee shop
+- Required for any resources within your VPC that need internet access
+
+### Virtual Private Gateway
+
+- Allows encrypted traffic to enter the VPC via a VPN connection
+- Used to connect a VPC to a private network (like an on-premises data center)
+- Adds a layer of protection while using public internet routes
+- Accepts traffic only from approved networks
+
+### AWS Direct Connect
+
+- Establishes a dedicated private connection between your data center and AWS
+- Avoids the public internet entirely
+- Provides lower latency and higher security
+- Comparable to a private hallway that links your building directly to the coffee shop (AWS), bypassing public roads
+
+## Subnets and Network Access Control Lists
+
+### Subnets
+
+- A subnet is a section of a VPC where resources can be grouped based on security or operational needs.
+- Public subnets: Contain resources accessible to the internet.
+- Private subnets: Contain resources not directly accessible from the internet.
+- Subnets within a VPC can communicate with each other.
+
+### Network Traffic in a VPC
+
+- Incoming traffic enters a VPC through an internet gateway.
+- Traffic is evaluated before entering or leaving a subnet using network access control lists (ACLs).
+- After entering a subnet, traffic to individual resources (like EC2 instances) is evaluated by security groups.
+
+### Network Access Control Lists (ACLs)
+
+- ACLs are virtual firewalls that operate at the subnet level.
+- Control inbound and outbound traffic using a set of rules.
+- Stateless: ACLs do not remember previous requests and evaluate each packet independently.
+- Default ACL: Allows all traffic unless modified.
+- Custom ACL: Denies all traffic by default until rules are added.
+- All ACLs have an explicit deny rule for unmatched packets.
+
+### Security Groups
+
+- A security group is a virtual firewall at the instance level.
+- Controls inbound and outbound traffic to the instance.
+- Stateful: Remembers previous connections and automatically allows return traffic.
+- Default behavior:
+  - Deny all inbound traffic
+  - Allow all outbound traffic
+- You can associate:
+  - One security group with multiple instances
+  - Different security groups per instance
+
+#### Analogy:
+A security group is like a door attendant at an apartment building who checks incoming guests but doesn’t recheck guests leaving.
+
+### Key Differences
+
+| Feature             | Network ACLs                 | Security Groups             |
+|---------------------|------------------------------|-----------------------------|
+| Level               | Subnet                       | Instance                    |
+| Type                | Stateless                    | Stateful                    |
+| Default Rules       | Allow all (default ACL)      | Deny all inbound, allow outbound |
+| Traffic Direction   | Must explicitly allow both directions | Automatically allows return traffic |
+| Use Case            | Broad network boundary control | Fine-grained instance-level control |
+
+## Domain Name System (DNS) and Amazon Route 53
+
+### Domain Name System (DNS)
+
+DNS is the system that translates human-readable domain names into IP addresses so users can access websites.
+
+- DNS is like the phone book of the internet.
+- When a user enters a domain (ex: AnyCompany.com), the request is sent to a DNS server.
+- The DNS server returns the IP address of the web server (ex: 192.0.2.0) that hosts the website.
+- The user's browser then connects to that IP address to load the website.
+
+### Amazon Route 53
+
+Amazon Route 53 is AWS's scalable and highly available DNS web service.
+
+Key features:
+- Routes user requests to AWS services (EC2, load balancers) or resources hosted outside AWS.
+- Registers domain names and manages DNS records.
+- Allows transfers of DNS records from other registrars for centralized domain management.
+
+### How Route 53 and CloudFront Work Together
+
+Example: A customer accesses AnyCompany.com.
+
+1. The customer enters AnyCompany.com in their browser.
+2. Amazon Route 53 performs DNS resolution and returns the IP address (e.g., 192.0.2.0).
+3. The request is sent to the nearest edge location using Amazon CloudFront.
+4. CloudFront forwards the request to an Application Load Balancer.
+5. The load balancer routes the request to an appropriate Amazon EC2 instance in the Auto Scaling group.
+
+This setup ensures low latency, high availability, and scalable content delivery for users around the world.
+

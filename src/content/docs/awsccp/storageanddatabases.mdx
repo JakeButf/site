@@ -1,0 +1,79 @@
+---
+title: Storage and Databases 
+description: An overview of AWS storage and databases 
+---
+
+## Instance Stores and Amazon EBS
+
+An instance store provides temporary block-level storage that is physically attached to the EC2 host. Data is lost when the instance is stopped or terminated. Amazon EBS is a block-level storage service that retains data even if the EC2 instance is stopped or terminated. You can configure volume size and type, and attach it to an EC2 instance. EBS snapshots are incremental backups. The first snapshot captures all data, and subsequent snapshots only capture changes.
+
+## Amazon S3
+
+Amazon S3 is an object-level storage service that stores data as objects in buckets. Objects consist of data, metadata, and a key. Modifying a file in object storage replaces the entire object. You can upload files like images, videos, documents, and backups. Amazon S3 offers unlimited storage with a 5 TB max per object. It supports permissions and versioning.
+
+### Amazon S3 Storage Classes
+
+Amazon S3 Standard: For frequently accessed data, stored in at least three Availability Zones.
+
+Amazon S3 Standard-IA: For infrequently accessed data, with lower storage cost and higher retrieval cost.
+
+Amazon S3 One Zone-IA: For infrequent access, stores data in a single Availability Zone and offers a lower price.
+
+Amazon S3 Intelligent-Tiering: For unknown or changing access patterns, automatically moves objects between tiers.
+
+Amazon S3 Glacier Instant Retrieval: For archived data requiring immediate access, with millisecond retrieval time.
+
+Amazon S3 Glacier Flexible Retrieval: Low-cost archival storage with minutes-to-hours retrieval time.
+
+Amazon S3 Glacier Deep Archive: Lowest-cost archival storage with 12 to 48 hour retrieval time.
+
+Amazon S3 Outposts: Object storage on AWS Outposts, for local data residency and high-performance needs.
+
+## Amazon EFS
+
+Amazon EFS is a scalable file storage service for AWS and on-premises use. It supports concurrent access from multiple Availability Zones and automatically scales with file system changes.
+
+### Comparing Amazon EBS and Amazon EFS
+
+Amazon EBS: Stores data in a single Availability Zone. EC2 and EBS must be in the same Availability Zone.
+
+Amazon EFS: Regional service that stores data across multiple Availability Zones. Accessible from on-premises via AWS Direct Connect.
+
+## Amazon RDS
+
+Relational databases store structured data using SQL. Data is stored in rows and columns with related tables.
+
+Amazon RDS is a managed service for relational databases. It handles provisioning, setup, patching, and backups.
+
+Amazon RDS offers encryption at rest and in transit. Supported engines include:
+
+- Amazon Aurora
+- PostgreSQL
+- MySQL
+- MariaDB
+- Oracle Database
+- Microsoft SQL Server
+
+### Amazon Aurora
+
+Amazon Aurora is compatible with MySQL and PostgreSQL. It offers higher performance and replicates six copies of data across three Availability Zones. Data is continuously backed up to S3.
+
+## Amazon DynamoDB
+
+Amazon DynamoDB is a nonrelational key-value database service. Tables contain items, and items have flexible attributes.
+
+It is serverless and automatically scales with demand. Delivers single-digit millisecond performance at any scale.
+
+## Amazon Redshift
+
+Amazon Redshift is a data warehousing service for big data analytics. It aggregates data from multiple sources to uncover trends and relationships.
+
+## AWS Database Migration Service (AWS DMS)
+
+AWS DMS supports migration between relational, nonrelational, and other data stores. Migrations occur with minimal downtime as the source database remains operational.
+
+Use cases:
+
+- Development and test migrations
+- Database consolidation
+- Continuous replication
